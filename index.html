@@ -552,7 +552,8 @@
             margin-bottom: 1rem;
         }
         .skill-bar::before {
-            content: attr(data-skill);
+            /* MODIFIED: Added percentage */
+            content: attr(data-skill) " - " attr(data-level) "%";
             font-weight: 600;
             display: block;
             margin-bottom: 0.5rem;
@@ -569,20 +570,33 @@
         }
 
         /* JS will add this style */
+        /* DELETED this redundant rule
         .skill-bar[style]::after {
             width: 100%;
             background-color: var(--c-primary-dim);
         }
+        */
 
-        .skill-bar[style]::before {
-            /* This is the actual animated bar */
+        /* MODIFIED: Changed from ::before to ::after to fix text conflict */
+        .skill-bar[style]::after {
+            /* This is now the animated fill bar */
+            /* This rule overrides .skill-bar::after, so it must */
+            /* also create the background track. */
             content: '';
-            position: absolute;
+            display: block;
             height: 10px;
-            background-color: var(--c-primary);
+            background-color: var(--c-primary-dim); /* The background track */
             border-radius: 5px;
-            width: var(--skill-level, 0%);
-            transition: width 1s ease-out 0.5s;
+            position: relative;
+            overflow: hidden;
+
+            /* We use a gradient for the fill, and animate its size */
+            background-image: linear-gradient(to right, var(--c-primary), var(--c-primary));
+            background-repeat: no-repeat;
+            background-size: var(--skill-level, 0%) 100%; /* JS sets --skill-level */
+
+            /* Animate the background-size property */
+            transition: background-size 1s ease-out 0.5s;
         }
 
 
@@ -1141,7 +1155,7 @@
         <div class="skills-grid">
             <div class="card glass reveal" data-anim="right">
                 <h3>Programming</h3>
-                <div class="skill-bar" data-skill="Python" data-level="85">85</div>
+                <div class="skill-bar" data-skill="Python" data-level="85"></div>
                 <div class="skill-bar" data-skill="Bash Scripting" data-level="78"></div>
                 <div class="skill-bar" data-skill="C#" data-level="70"></div>
             </div>
@@ -1564,6 +1578,7 @@
 </script>
 </body>
 </html>
+
 
 
 
