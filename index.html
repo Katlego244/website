@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    require('dotenv').config()
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Katlego Molotsi | Cybersecurity Portfolio</title>
@@ -533,7 +534,7 @@
         }
         .details li strong, .details li a {
             font-weight: 600;
-            text-align: right;
+            text-alrequire('dotenv').config()ign: right;
         }
 
         /* Skills Section */
@@ -1272,6 +1273,7 @@
                 <div class="skill-bar" data-skill="Python" data-level="85"></div>
                 <div class="skill-bar" data-skill="Bash Scripting" data-level="78"></div>
                 <div class="skill-bar" data-skill="C#" data-level="70"></div>
+                <div class="skill-bar" data-skill="TypeScript & JavaScript" data-level="95"></div>
             </div>
             <div class="card glass reveal" data-anim="up" data-delay="100">
                 <h3>Security & Tools</h3>
@@ -1814,7 +1816,7 @@
 
         // Function to call the Gemini API
         async function callGemini(chatHistory) {
-            const apiKey = "AIzaSyD4qn3QEF9HLwNtTtGU0QKnHrp6uaVrrtY"; // API key is handled by the environment
+            const apiKey = apiKey; // API key is handled by the environment
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
             // We don't need to send the system prompt every time,
