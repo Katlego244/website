@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- UPDATED TITLE -->
     <title>Courses | Katlego Molotsi's Online School</title>
     <meta name="description" content="Explore courses in Cybersecurity, AI, and IT from Katlego Molotsi." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,39 +17,19 @@
             --font-sans: "Inter", sans-serif;
             --font-mono: "JetBrains Mono", monospace;
 
-            --c-bg-light: #f0f4f9;
-            --c-text-light: #121826;
-            --c-card-light: rgba(255, 255, 255, 0.6);
-            --c-border-light: rgba(200, 200, 220, 0.4);
-            --c-primary-light: #0055ff;
-            --c-primary-dim-light: rgba(0, 85, 255, 0.1);
-            --c-hero-glow-light: radial-gradient(
+            /* Light mode by default */
+            --c-bg: #f0f4f9;
+            --c-text: #121826;
+            --c-card: rgba(255, 255, 255, 0.6);
+            --c-border: rgba(200, 200, 220, 0.4);
+            --c-primary: #0055ff;
+            --c-primary-dim: rgba(0, 85, 255, 0.1);
+            --c-hero-glow: radial-gradient(
                     ellipse 50% 50% at 50% 50%,
                     rgba(0, 85, 255, 0.2),
                     rgba(240, 244, 249, 0)
             );
-
-            --c-bg-dark: #0f121a;
-            --c-text-dark: #e0e8f9;
-            --c-card-dark: rgba(24, 30, 43, 0.6);
-            --c-border-dark: rgba(100, 110, 130, 0.4);
-            --c-primary-dark: #00ddff;
-            --c-primary-dim-dark: rgba(0, 221, 255, 0.1);
-            --c-hero-glow-dark: radial-gradient(
-                    ellipse 50% 50% at 50% 50%,
-                    rgba(0, 221, 255, 0.15),
-                    rgba(15, 18, 26, 0)
-            );
-
-            /* Light mode by default */
-            --c-bg: var(--c-bg-light);
-            --c-text: var(--c-text-light);
-            --c-card: var(--c-card-light);
-            --c-border: var(--c-border-light);
-            --c-primary: var(--c-primary-light);
-            --c-primary-dim: var(--c-primary-dim-light);
-            --c-hero-glow: var(--c-hero-glow-light);
-            --c-matrix: var(--c-primary-light);
+            --c-matrix: #0055ff;
             --c-avatar-ring: #cbd5e1;
             --c-avatar-inner: #e2e8f0;
             --c-avatar-text: #475569;
@@ -58,14 +37,18 @@
         }
 
         [data-theme="dark"] {
-            --c-bg: var(--c-bg-dark);
-            --c-text: var(--c-text-dark);
-            --c-card: var(--c-card-dark);
-            --c-border: var(--c-border-dark);
-            --c-primary: var(--c-primary-dark);
-            --c-primary-dim: var(--c-primary-dim-dark);
-            --c-hero-glow: var(--c-hero-glow-dark);
-            --c-matrix: var(--c-primary-dark);
+            --c-bg: #0f121a;
+            --c-text: #e0e8f9;
+            --c-card: rgba(24, 30, 43, 0.6);
+            --c-border: rgba(100, 110, 130, 0.4);
+            --c-primary: #00ddff;
+            --c-primary-dim: rgba(0, 221, 255, 0.1);
+            --c-hero-glow: radial-gradient(
+                    ellipse 50% 50% at 50% 50%,
+                    rgba(0, 221, 255, 0.15),
+                    rgba(15, 18, 26, 0)
+            );
+            --c-matrix: #00ddff;
             --c-avatar-ring: #334155;
             --c-avatar-inner: #1e293b;
             --c-avatar-text: #94a3b8;
@@ -207,7 +190,6 @@
             opacity: 1;
         }
 
-        /* NEW: Active link style */
         .nav-links a.active {
             color: var(--c-primary);
             border-bottom-color: var(--c-primary);
@@ -247,7 +229,6 @@
             padding: 0.25rem;
             cursor: pointer;
             display: flex;
-            margin-left: 1rem;
         }
 
         .theme-toggle .sun,
@@ -282,7 +263,6 @@
         }
 
         .section {
-            /* Adjusted padding for a non-hero page */
             padding: 8rem 0 2rem;
             position: relative;
         }
@@ -438,13 +418,12 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Staggered delays */
         .reveal[data-delay="50"] { transition-delay: 50ms; }
         .reveal[data-delay="100"] { transition-delay: 100ms; }
         .reveal[data-delay="150"] { transition-delay: 150ms; }
         .reveal[data-delay="200"] { transition-delay: 200ms; }
+        .reveal[data-delay="250"] { transition-delay: 250ms; }
 
-        /* Animation directions */
         .reveal[data-anim="up"] { transform: translateY(30px); }
         .reveal[data-anim="left"] { transform: translateX(30px); }
         .reveal[data-anim="right"] { transform: translateX(-30px); }
@@ -467,14 +446,19 @@
                 display: none;
             }
 
-            /* NEW: Courses grid responsive */
+            /* --- UPDATED FOR SINGLE BUTTON (Desktop) --- */
+            .navbar .theme-toggle {
+                display: flex;
+                margin-left: 1rem;
+            }
+            /* ------------------------------------------- */
+
             .courses-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (min-width: 1024px) {
-            /* NEW: Courses grid responsive */
             .courses-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -505,27 +489,29 @@
                 font-size: 1.5rem;
             }
 
+            /* --- UPDATED FOR SINGLE BUTTON (Mobile) --- */
+            /* Hide toggle in navbar on mobile */
+            .navbar .theme-toggle {
+                display: none;
+            }
+
+            /* Position the single theme toggle in the center of the viewport when menu is active */
             .theme-toggle {
-                position: absolute;
+                position: fixed;
                 bottom: 2rem;
                 left: 50%;
                 transform: translateX(-50%);
                 z-index: 101;
                 padding: 0.5rem;
                 font-size: 1.25rem;
+                display: none; /* Hide by default */
             }
-            /* Hide toggle in navbar on mobile, show it in the menu */
-            .navbar .theme-toggle {
-                display: none;
-            }
-            /* But if menu is not active, don't show it */
-            .theme-toggle:not(.menu-toggle) {
-                display: none;
-            }
-            /* Show it when the menu is active */
-            .nav-links.active + .theme-toggle {
+
+            /* Show the single theme toggle ONLY when the nav menu is active */
+            .nav-links.active ~ .theme-toggle { /* Use ~ (general sibling) */
                 display: flex;
             }
+            /* ------------------------------------------- */
         }
     </style>
 </head>
@@ -541,13 +527,12 @@
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
-        <!-- UPDATED NAV LINKS -->
         <ul class="nav-links">
             <li><a href="index.html">Portfolio</a></li>
             <li><a href="courses.html" class="active">Courses</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
-        <!-- Theme toggle is cloned by JS into mobile menu -->
+        <!-- This is the single, original theme toggle -->
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
             <span class="sun" aria-hidden="true">☀</span>
             <span class="moon" aria-hidden="true">🌙</span>
@@ -555,7 +540,6 @@
     </nav>
 </header>
 
-<!-- NEW PAGE CONTENT -->
 <main>
     <section id="courses-page" class="section">
         <div class="section-head">
@@ -564,7 +548,6 @@
         </div>
 
         <div class="courses-grid">
-
             <!-- Course 1 -->
             <article class="card glass course-card reveal" data-anim="up" data-delay="50">
                 <h3>IT Essentials</h3>
@@ -592,7 +575,7 @@
             </article>
 
             <!-- Course 3 -->
-            <article class="card glass course-card reveal" data-anim="up" data-delay="150">
+            <article class="card glass course-card reveal" data-anim="up" data-delay="1S0">
                 <h3>AI in Cybersecurity</h3>
                 <p>
                     Discover the dual role of AI in security. Learn how it's used to detect threats in real-time (e.g., anomaly detection) and how attackers are leveraging it for new vectors.
@@ -642,17 +625,12 @@
     </div>
 </footer>
 
-<!--
-  Embedded JavaScript for a single-file solution.
-  All scripts from index.html are included.
--->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
         // --- Matrix Rain Background ---
         const canvas = document.getElementById("matrix-bg");
         const ctx = canvas.getContext("2d");
-
         let w = (canvas.width = window.innerWidth);
         let h = (canvas.height = window.innerHeight);
         let cols = Math.floor(w / 20) + 1;
@@ -663,10 +641,8 @@
             ctx.globalAlpha = 0.1;
             ctx.fillRect(0, 0, w, h);
             ctx.globalAlpha = 1;
-
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-matrix');
             ctx.font = "15pt 'JetBrains Mono'";
-
             ypos.forEach((y, ind) => {
                 const text = String.fromCharCode(Math.random() * 128);
                 const x = ind * 20;
@@ -676,7 +652,6 @@
             });
         }
         let matrixInterval = setInterval(matrix, 60);
-
         window.addEventListener("resize", () => {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
@@ -686,47 +661,41 @@
             matrixInterval = setInterval(matrix, 60);
         });
 
-        // --- Theme Toggle ---
-        const themeToggle = document.getElementById("theme-toggle");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+        // --- Theme Toggle (FIXED) ---
+        const mainThemeToggle = document.getElementById("theme-toggle");
 
-        // Function to set theme
+        // Correctly sets the theme by adding/removing the 'data-theme' attribute
         function setTheme(theme) {
-            document.documentElement.setAttribute("data-theme", theme);
+            if (theme === 'dark') {
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+            }
             localStorage.setItem("theme", theme);
         }
 
-        // Set initial theme
+        // Set initial theme on load
         const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
         if (savedTheme) {
             setTheme(savedTheme);
         } else {
-            setTheme(prefersDark.matches ? "dark" : "light");
+            setTheme(prefersDark ? "dark" : "light");
         }
 
-        // Listener for toggle button
-        themeToggle.addEventListener("click", () => {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
+        // Corrected click listener for the single theme button
+        mainThemeToggle.addEventListener("click", () => {
+            const currentTheme = document.documentElement.hasAttribute("data-theme") ? 'dark' : 'light';
             setTheme(currentTheme === "dark" ? "light" : "dark");
         });
 
-        // Listener for system theme changes
-        prefersDark.addEventListener("change", (e) => {
-            if (!localStorage.getItem("theme")) {
-                setTheme(e.matches ? "dark" : "light");
-            }
-        });
 
-        // --- Mobile Navigation ---
+        // --- Mobile Navigation (FIXED) ---
         const navToggle = document.querySelector(".nav-toggle");
         const navLinks = document.querySelector(".nav-links");
-        const mainThemeToggle = document.getElementById("theme-toggle");
 
-        // Clone theme toggle for mobile menu
-        const menuThemeToggle = mainThemeToggle.cloneNode(true);
-        menuThemeToggle.id = "menu-theme-toggle";
-        menuThemeToggle.classList.add("menu-toggle"); // Add class to identify
-        document.body.appendChild(menuThemeToggle); // Append to body to be positioned fixed
+        // REMOVED: Cloned button logic
 
         navToggle.addEventListener("click", () => {
             navToggle.classList.toggle("active");
@@ -734,58 +703,46 @@
             document.body.style.overflow = navLinks.classList.contains("active") ? "hidden" : "";
         });
 
-        // Close menu when a link is clicked
+        // Close menu when a hash link is clicked
         navLinks.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => {
-                // No need to close if it's not a hash link
-                if(link.getAttribute('href').startsWith('#')) {
+            link.addEventListener("click", (e) => {
+                // Only close menu if it's a hash link for the same page
+                if (link.getAttribute("href").includes("#")) {
                     navToggle.classList.remove("active");
                     navLinks.classList.remove("active");
                     document.body.style.overflow = "";
                 }
+                // If it's a link to a new page (like index.html or courses.html),
+                // the page will reload anyway, so we don't need to do anything.
             });
         });
 
-        // Sync theme toggles
-        [mainThemeToggle, menuThemeToggle].forEach(toggle => {
-            toggle.addEventListener("click", () => {
-                const currentTheme = document.documentElement.getAttribute("data-theme");
-                const newTheme = currentTheme === "dark" ? "light" : "dark";
-                setTheme(newTheme);
-            });
-        });
+        // REMOVED: Synced button loop
 
 
         // --- 3D Tilt Effect ---
-        // This is not present on the courses page, but we keep the function
-        // (or it could be removed if we wanted to slim the JS)
+        // (No .tilt cards on this page, but we keep the function)
         function initTiltEffect() {
             const tiltCards = document.querySelectorAll(".project-card.tilt");
-            if(tiltCards.length === 0) return; // No tilt cards on this page
+            if(tiltCards.length === 0) return;
 
             tiltCards.forEach(card => {
                 const glare = card.querySelector(".project-glare");
-
                 card.addEventListener("mousemove", (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-
                     const width = card.offsetWidth;
                     const height = card.offsetHeight;
-
-                    const rotateX = (y - height / 2) / (height / 2) * -8; // Max 8deg tilt
-                    const rotateY = (x - width / 2) / (width / 2) * 8; // Max 8deg tilt
-
+                    const rotateX = (y - height / 2) / (height / 2) * -8;
+                    const rotateY = (x - width / 2) / (width / 2) * 8;
                     const glareX = (x / width) * 100;
                     const glareY = (y / height) * 100;
-
                     card.style.transform = `scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                     if (glare) {
                         glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%)`;
                     }
                 });
-
                 card.addEventListener("mouseleave", () => {
                     card.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
                     if (glare) {
@@ -794,13 +751,13 @@
                 });
             });
         }
-        initTiltEffect(); // Run it, it will just exit if no .tilt cards
+        initTiltEffect();
 
 
         // --- Custom Simple Typed Effect ---
         const typedEl = document.getElementById("typed");
-        if (typedEl) { // This `if` check prevents errors on this new page
-            const text = typedEl.textContent;
+        if (typedEl) { // This `if` check prevents errors on this page
+            const text = typedEl.textContent.trim();
             typedEl.textContent = "";
             let i = 0;
             let cursor = document.createElement("span");
@@ -815,19 +772,16 @@
                     setTimeout(type, 80);
                 }
             }
-            setTimeout(type, 500); // Start after a delay
+            setTimeout(type, 500);
         }
 
         // --- Scroll Reveal Animation ---
         const revealElements = document.querySelectorAll(".reveal");
-        const skillBars = document.querySelectorAll(".skill-bar");
-
+        const skillBars = document.querySelectorAll(".skill-bar"); // (if any)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("in-view");
-
-                    // Check if the intersecting element is a skill bar
                     if (entry.target.classList.contains("skill-bar")) {
                         const level = entry.target.getAttribute("data-level");
                         entry.target.style.setProperty('--skill-level', level + '%');
@@ -835,24 +789,21 @@
                 }
             });
         }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1
         });
-
         revealElements.forEach(el => observer.observe(el));
-        skillBars.forEach(el => observer.observe(el)); // Observe skill bars (if any)
+        skillBars.forEach(el => observer.observe(el));
 
         // --- Contact Form ---
         const contactForm = document.getElementById("contact-form");
-        if (contactForm) { // This page doesn't have a contact form, so check
+        if (contactForm) { // This page doesn't have a contact form
             contactForm.addEventListener("submit", function (e) {
                 e.preventDefault();
                 const name = e.target.name.value;
                 const email = e.target.email.value;
                 const message = e.target.message.value;
-
                 const subject = encodeURIComponent(`Message from ${name} via Portfolio`);
                 const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
-
                 window.location.href = `mailto:s227003977@mandela.ac.za?subject=${subject}&body=${body}`;
             });
         }
@@ -863,3 +814,4 @@
 </script>
 </body>
 </html>
+
