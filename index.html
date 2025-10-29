@@ -557,25 +557,11 @@
             font-weight: 600;
             display: block;
             margin-bottom: 0.5rem;
-        }
-        .skill-bar::after {
-            content: '';
-            display: block;
-            height: 10px;
-            width: 100%;
-            background-color: var(--c-primary-dim);
-            border-radius: 5px;
+            /* Ensure text stays visible */
             position: relative;
-            overflow: hidden;
+            z-index: 2;
+            color: var(--c-text);
         }
-
-        /* JS will add this style */
-        /* DELETED this redundant rule
-        .skill-bar[style]::after {
-            width: 100%;
-            background-color: var(--c-primary-dim);
-        }
-        */
 
         /* MODIFIED: Changed from ::before to ::after to fix text conflict */
         .skill-bar[style]::after {
@@ -589,6 +575,9 @@
             border-radius: 5px;
             position: relative;
             overflow: hidden;
+            /* Move bar behind text if needed, but text has z-index */
+            margin-top: -10px; /* Pulls it up to align */
+            z-index: 1;
 
             /* We use a gradient for the fill, and animate its size */
             background-image: linear-gradient(to right, var(--c-primary), var(--c-primary));
@@ -763,7 +752,7 @@
             opacity: 0.9;
         }
 
-        /* NEW: Online School Section */
+        /* Online School Section */
         .school-card-wrapper {
             max-width: 900px;
             margin: 0 auto;
@@ -950,7 +939,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            /* NEW: Online School responsive */
+            /* Online School responsive */
             .school-content {
                 flex-direction: row;
                 gap: 2rem;
@@ -1061,8 +1050,8 @@
             <li><a href="#certificates">Certificates</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#experience">Experience</a></li>
-            <!-- NEW LINK ADDED HERE -->
-            <li><a href="#school">My School</a></li>
+            <!-- UPDATED LINK -->
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <!-- Theme toggle is cloned by JS into mobile menu -->
@@ -1155,12 +1144,14 @@
         <div class="skills-grid">
             <div class="card glass reveal" data-anim="right">
                 <h3>Programming</h3>
+                <!-- Updated skill bar divs -->
                 <div class="skill-bar" data-skill="Python" data-level="85"></div>
                 <div class="skill-bar" data-skill="Bash Scripting" data-level="78"></div>
                 <div class="skill-bar" data-skill="C#" data-level="70"></div>
             </div>
             <div class="card glass reveal" data-anim="up" data-delay="100">
                 <h3>Security & Tools</h3>
+                <!-- Corrected list with chip class -->
                 <ul class="chips">
                     <li class="chip">Wireshark</li>
                     <li class="chip">Nmap</li>
@@ -1279,7 +1270,7 @@
         </div>
     </section>
 
-    <!-- =========== NEW SECTION ADDED HERE =========== -->
+    <!-- =========== ONLINE SCHOOL SECTION =========== -->
     <section id="school" class="section">
         <div class="section-head">
             <h2 class="section-title reveal" data-anim="up">My Online School</h2>
@@ -1298,8 +1289,8 @@
                         </p>
                     </div>
                     <div class="school-cta">
-                        <!-- This button links to the contact section -->
-                        <a href="#contact" class="btn primary">Inquire About Courses</a>
+                        <!-- UPDATED BUTTON LINK -->
+                        <a href="courses.html" class="btn primary">Explore Courses</a>
                     </div>
                 </div>
             </article>
@@ -1430,7 +1421,7 @@
         // Listener for toggle button
         themeToggle.addEventListener("click", () => {
             const currentTheme = document.documentElement.getAttribute("data-theme");
-            setTheme(currentTheme === "dark" ? "light" : "dark");
+            setTheme(currentTheme === "dark" ? "light" : "light");
         });
 
         // Listener for system theme changes
@@ -1460,9 +1451,12 @@
         // Close menu when a link is clicked
         navLinks.querySelectorAll("a").forEach(link => {
             link.addEventListener("click", () => {
-                navToggle.classList.remove("active");
-                navLinks.classList.remove("active");
-                document.body.style.overflow = "";
+                // Only close menu if it's a hash link for the same page
+                if (link.getAttribute("href").startsWith("#")) {
+                    navToggle.classList.remove("active");
+                    navLinks.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
             });
         });
 
@@ -1517,7 +1511,7 @@
         // --- Custom Simple Typed Effect ---
         const typedEl = document.getElementById("typed");
         if (typedEl) {
-            const text = typedEl.textContent;
+            const text = typedEl.textContent.trim(); // Trim whitespace
             typedEl.textContent = "";
             let i = 0;
             let cursor = document.createElement("span");
@@ -1560,17 +1554,19 @@
 
         // --- Contact Form ---
         const contactForm = document.getElementById("contact-form");
-        contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const name = e.target.name.value;
-            const email = e.target.email.value;
-            const message = e.target.message.value;
+        if (contactForm) {
+            contactForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const name = e.target.name.value;
+                const email = e.target.email.value;
+                const message = e.target.message.value;
 
-            const subject = encodeURIComponent(`Message from ${name} via Portfolio`);
-            const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
+                const subject = encodeURIComponent(`Message from ${name} via Portfolio`);
+                const body = encodeURIComponent(`${message}\n\From: ${name} (${email})`);
 
-            window.location.href = `mailto:s227003977@mandela.ac.za?subject=${subject}&body=${body}`;
-        });
+                window.location.href = `mailto:s227003977@mandela.ac.za?subject=${subject}&body=${body}`;
+            });
+        }
 
         // --- Footer Year ---
         document.getElementById("year").textContent = new Date().getFullYear();
@@ -1578,7 +1574,4 @@
 </script>
 </body>
 </html>
-
-
-
 
